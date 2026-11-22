@@ -1,0 +1,16 @@
+---
+layout: default
+---
+<article class="recipe">
+  <p class="crumb"><span>{{ page.category }}</span>
+    <a class="no-print" href="{{ '/' | relative_url }}">↑ All recipes</a></p>
+  <h1>{{ page.title }}</h1>
+  <dl class="info">
+    <div><dt>Cuisine</dt><dd>{{ page.cuisine }}</dd></div>
+    <div><dt>Serves</dt><dd>{{ page.serves }}</dd></div>
+    <div><dt>Prep</dt><dd>{{ page.prep }}</dd></div>
+    <div><dt>Cook</dt><dd>{{ page.cook }}</dd></div>
+  </dl>
+  <p class="tags">{% for t in page.tags %}<span>{{ site.data.tags[t].icon }} {{ site.data.tags[t].label }}</span>{% endfor %}</p>
+  <div class="body">{{ content }}</div>
+</article>

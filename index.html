@@ -1,0 +1,33 @@
+---
+layout: default
+---
+{% assign cats = site.recipes | map: "category" | uniq | sort %}
+{% assign cuisines = site.recipes | map: "cuisine" | uniq | sort %}
+<div id="filters" class="no-print">
+  <input id="q" type="search" placeholder="Search recipes…">
+  <select id="cat"><option value="">All categories</option>{% for c in cats %}<option>{{ c }}</option>{% endfor %}</select>
+  <select id="cui"><option value="">All cuisines</option>{% for c in cuisines %}<option>{{ c }}</option>{% endfor %}</select>
+  <select id="diet"><option value="">Any diet</option>{% for t in site.data.tags %}<option value="{{ t[0] }}">{{ t[1].icon }} {{ t[1].label }}</option>{% endfor %}</select>
+</div>
+<ul id="list">
+{% assign sorted = site.recipes | sort: "title" %}
+{% for r in sorted %}
+  <li data-cat="{{ r.category }}" data-cuisine="{{ r.cuisine }}" data-tags="{{ r.tags | join: ' ' }}"
+      data-text="{{ r.title | append: ' ' | append: r.cuisine | downcase }}">
+    <a href="{{ r.url | relative_url }}">{{ r.title }}</a>
+    <span class="meta">{{ r.cuisine }} · {{ r.category }}</span>
+    <span class="icons">{% for t in r.tags %}{{ site.data.tags[t].icon }} {% endfor %}</span>
+  </li>
+{% endfor %}
+</ul>
+<script>
+  const $ = id => document.getElementById(id);
+  function apply() {
+    const q = $('q').value.toLowerCase(), c = $('cat').value, u = $('cui').value, d = $('diet').value;
+    document.querySelectorAll('#list li').forEach(li => {
+      li.hidden = !((!q || li.dataset.text.includes(q)) && (!c || li.dataset.cat === c) &&
+        (!u || li.dataset.cuisine === u) && (!d || li.dataset.tags.split(' ').includes(d)));
+    });
+  }
+  ['q','cat','cui','diet'].forEach(id => $(id).addEventListener('input', apply));
+</script>

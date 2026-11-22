@@ -1,0 +1,6 @@
+veg:     { icon: "🥦", label: "Vegetarian" }
+meat:    { icon: "🍖", label: "Contains Meat" }
+seafood: { icon: "🐟", label: "Seafood" }
+eggs:    { icon: "🥚", label: "Contains Eggs" }
+dairy:   { icon: "🥛", label: "Contains Dairy" }
+nuts:    { icon: "🥜", label: "Contains Nuts" }

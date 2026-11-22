@@ -1,0 +1,10 @@
+title: Master List of All Recipes
+description: Tried, tested, and written down for keeps.
+baseurl: "/recipes"        # your repo name; use "" if the repo is USERNAME.github.io
+collections:
+  recipes:
+    output: true
+    permalink: /recipe/:name/
+defaults:
+  - scope: { path: "", type: "recipes" }
+    values: { layout: recipe }
